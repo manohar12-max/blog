@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const userRoute=require("./routes/userRoute")
+const blogRoute=require("./routes/blogRoute")
 dotenv.config();
 
 const app = express();
@@ -17,7 +18,8 @@ app.get('/', (req, res) => {
     res.send('Hello Blog');
   });
   
-  app.use("/api/auth",userRoute)
+app.use("/api/auth",userRoute)
+app.use("/api/blog",blogRoute)
 
 const PORT = process.env.PORT || 5000;
 

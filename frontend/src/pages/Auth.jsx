@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import api from "../../api/api"; // Import the central api config file
 import { useNavigate } from "react-router-dom";
+import { useUserContext } from "../context/UserContext";
 
 const Auth = () => {
+  const {setUser}=useUserContext()
   const [isSignIn, setIsSignIn] = useState(true);
 
   const [formData, setFormData] = useState({
@@ -40,11 +42,20 @@ const Auth = () => {
 
     try {
       const response = isSignIn
-        ? await api.post("/auth/login", { email, password }) // For SignIn, only send email & password
-        : await api.post("/auth/signup", { username: username, email, password }); // For SignUp, send username, email & password
-
-      localStorage.setItem("userToken", JSON.stringify(response.data.token));
-
+        ? await api.post("/auth/login", { email, password })
+        : await api.post("/auth/signup", {
+            username: username,
+            email,
+            password,
+          });
+      localStorage.setItem("userInfo", JSON.stringify({
+        token:response.data.token,
+        username:response.data.username
+      }));
+      setUser({
+        token:response.data.token,
+        username:response.data.username
+      })
       setFormData({ username: "", email: "", password: "" });
       setLoading(false);
       navigate("/");

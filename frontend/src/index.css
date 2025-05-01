@@ -328,3 +328,93 @@ body, html {
     font-size: 0.95rem;
   }
 }
+
+/* create blog */
+.create-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-background);
+  padding: 20px;
+}
+
+.create-card {
+  background-color: var(--color-surface);
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+  transition: all 0.3s ease;
+}
+
+.create-card h2 {
+  margin-bottom: 24px;
+  color: var(--color-text-primary);
+  font-size: 26px;
+  text-align: center;
+}
+
+.create-form input,
+.create-form textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  font-size: 16px;
+}
+
+.create-form textarea {
+  resize: none;
+}
+
+.create-button {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--color-primary);
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.create-button:hover {
+  background-color: var(--color-primary-hover);
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .create-card {
+    padding: 24px;
+  }
+
+  .create-card h2 {
+    font-size: 22px;
+  }
+
+  .create-form input,
+  .create-form textarea {
+    font-size: 15px;
+  }
+
+  .create-button {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .create-card {
+    padding: 20px 16px;
+    border-radius: 10px;
+  }
+
+  .create-card h2 {
+    font-size: 20px;
+  }
+}

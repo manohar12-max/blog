@@ -6,10 +6,8 @@ const NavbarMain = () => {
   const [scrolled, setScrolled] = useState(false);
   const { user, setUser } = useUserContext();  
   const navigate = useNavigate();
-useEffect(()=>{
 
-},[user])
-
+console.log(user)
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 50);
@@ -22,7 +20,7 @@ useEffect(()=>{
   const handleLogout = () => {
   
     setUser(null);  
-    localStorage.removeItem("userToken"); 
+    localStorage.removeItem("userInfo"); 
     navigate("/auth");  
   };
 
@@ -31,7 +29,7 @@ useEffect(()=>{
     if (!user) {
       navigate("/auth");  
     } else {
-      navigate("/create-blog");  
+      navigate("/blog/create");  
     }
   };
 
@@ -46,10 +44,13 @@ useEffect(()=>{
               Sign-In/Sign-Up
             </button>
           ) : (
-         
-            <button className="navbar-button" onClick={handleLogout}>
+             <>
+             <span>Welcome "{user?.username}"</span>
+             <button className="navbar-button" onClick={handleLogout}>
               Logout
             </button>
+             </>
+            
           )}
          
           <button className="navbar-button" onClick={handleCreateBlog}>

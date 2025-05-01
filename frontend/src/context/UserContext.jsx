@@ -5,12 +5,12 @@ const UserCon = createContext();
 
 const UserContextProvider = ({ children }) => {
   const [user, setUser] = useState();
-  const navigate=useNavigate()
+  
 
   useEffect(() => {
-    const userToken = JSON.parse(localStorage.getItem("userToken"));
-    if (userToken) {
-      setUser(userToken);
+    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+    if (userInfo) {
+      setUser(userInfo);
     }
   }, []);
 
