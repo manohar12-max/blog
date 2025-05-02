@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 
 const EditBlog = () => {
   const { id } = useParams();
-  console.log(id)
+
   const { user } = useUserContext();
   const [blog, setBlog] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -18,7 +18,7 @@ const EditBlog = () => {
     const fetchBlog = async () => {
       try {
         const res = await api.get(`/blog/${id}`);
-        console.log(res)
+       
         setBlog(res.data.data);
       } catch (error) {
         console.error("Failed to fetch blog:", error.message);
