@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import api from '../../api/api';
 import { useUserContext } from '../context/UserContext';
+import { toast } from 'react-toastify';
 
 
-const DetailListing = () => {
+const DetailBlog = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { user } = useUserContext(); // Access user context
@@ -36,11 +37,11 @@ const DetailListing = () => {
           Authorization: `Bearer ${user.token}`,
         },
       });
-      alert("Blog deleted successfully");
+      toast.success("Blog deleted successfully");
       navigate('/');
     } catch (error) {
       console.error("Error deleting blog:", error.message);
-      alert("Failed to delete blog");
+      toast.error("Failed to delete blog");
     }
   };
 
@@ -74,4 +75,4 @@ const DetailListing = () => {
   );
 };
 
-export default DetailListing;
+export default DetailBlog;

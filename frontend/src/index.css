@@ -24,6 +24,18 @@ body, html {
   width: 100%;
   background-color: var(--color-background);
 }
+::-webkit-scrollbar {
+  width: 6px; /* Thinner scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; 
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-text-primary);
+  border-radius: 10px;
+}
 
 /* navbar */
 .navbar {

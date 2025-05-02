@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import api from "../../api/api";
 import BlogList from "../components/BlogList";
 import { useUserContext } from "../context/UserContext";
+import { toast } from "react-toastify";
 
 const MyBlogs = () => {
     const {user}=useUserContext()
@@ -20,6 +21,7 @@ const MyBlogs = () => {
         setBlogs(res.data.data || []);
       } catch (error) {
         console.error("Error fetching my blogs:", error.message);
+        toast.error("Error fetching your blogs")
       }
     };
     fetchMyBlogs();

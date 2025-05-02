@@ -83,6 +83,7 @@ import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../context/UserContext";
 import api from "../../api/api";
 import BlogForm from "../components/BlogForm";
+import { toast } from "react-toastify";
 
 const CreateBlog = () => {
   const { user } = useUserContext();
@@ -103,14 +104,14 @@ const CreateBlog = () => {
         }
       );
       if (res.status === 201) {
-        alert("Blog created successfully!");
+        toast.success("Blog created successfully!");
         navigate("/");
       } else {
-        alert(res.data.message || "Failed to create blog.");
+        toast.error(res.data.message || "Failed to create blog.");
       }
     } catch (error) {
       console.error("Error creating blog:", error.message);
-      alert("An error occurred while creating the blog.");
+      toast.error("An error occurred while creating the blog.");
     } finally {
       setLoading(false);
     }

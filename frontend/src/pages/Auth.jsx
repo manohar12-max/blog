@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import api from "../../api/api"; // Import the central api config file
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../context/UserContext";
-
+import { toast } from 'react-toastify';
 const Auth = () => {
   const {setUser}=useUserContext()
   const [isSignIn, setIsSignIn] = useState(true);
@@ -58,13 +58,16 @@ const Auth = () => {
         username:response.data.username,
         _id:response.data._id,
       })
+      toast.success(`Welcome ${response.data.username}`);
       setFormData({ username: "", email: "", password: "" });
       setLoading(false);
       navigate("/");
+      
     } catch (err) {
       setLoading(false);
       setError(err.response?.data?.message || "Something went wrong.");
       console.error("Authentication error:", err);
+      
     }
   };
 
@@ -111,6 +114,7 @@ const Auth = () => {
             </span>
           </p>
         </form>
+       
       </div>
     </div>
   );

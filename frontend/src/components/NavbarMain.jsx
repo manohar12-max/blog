@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../context/UserContext";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FaPlus } from "react-icons/fa";
+import { toast } from "react-toastify";
 const NavbarMain = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -18,8 +19,10 @@ const NavbarMain = () => {
   const handleLogout = () => {
     setUser(null);
     localStorage.removeItem("userInfo");
+    toast.success("Logged out successfully")
     navigate("/auth");
     setMenuOpen(false);
+
   };
   const handleMyBlog=()=>{
     navigate("/blog/my-blogs");

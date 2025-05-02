@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useUserContext } from "../context/UserContext";
 import api from "../../api/api";
 import BlogForm from "../components/BlogForm";
+import { toast } from "react-toastify";
 
 const EditBlog = () => {
   const { id } = useParams();
@@ -21,6 +22,7 @@ const EditBlog = () => {
         setBlog(res.data.data);
       } catch (error) {
         console.error("Failed to fetch blog:", error.message);
+        toast.error("Failed to fetch blog")
       }
     };
     fetchBlog();
@@ -36,14 +38,14 @@ const EditBlog = () => {
         },
       });
       if (res.status === 200) {
-        alert("Blog updated successfully!");
+        toast.success("Blog updated successfully!");
         navigate(`/blog/${id}`);
       } else {
-        alert(res.data.message || "Failed to update blog.");
+        toast.error(res.data.message || "Failed to update blog.");
       }
     } catch (error) {
       console.error("Error updating blog:", error.message);
-      alert("An error occurred while updating the blog.");
+      toast.error("An error occurred while updating the blog.");
     } finally {
       setLoading(false);
     }
