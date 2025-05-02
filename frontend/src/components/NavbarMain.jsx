@@ -30,6 +30,9 @@ const NavbarMain = () => {
   }
 
   const handleCreateBlog = () => {
+    if(!user){
+     toast.warning("Please sign in to create amazing blogs")
+    }
     navigate(user ? "/blog/create" : "/auth");
     setMenuOpen(false);
   };
