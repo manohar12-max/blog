@@ -569,3 +569,23 @@ body, html {
   }
 }
 
+/* loader */
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; 
+  width: 100%;
+}
+
+.spinner-icon {
+  font-size: 2rem;
+  color: var(--color-text-primary); 
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import moment from "moment";
 const BlogList = ({ blogs = [], title, paginate = true, blogsPerPage = 6 }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ const BlogList = ({ blogs = [], title, paginate = true, blogsPerPage = 6 }) => {
               <button className="read-more-btn" onClick={() => navigate(`/blog/${blog._id}`)}>
                 Read More
               </button>
-              <span>Posted: {new Date(blog.createdAt).toLocaleDateString()}</span>
+              <span>Posted: {moment(blog.createdAt).fromNow()} </span>
             </p>
           </div>
         ))}

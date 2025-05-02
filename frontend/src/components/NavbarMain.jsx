@@ -20,7 +20,7 @@ const NavbarMain = () => {
     setUser(null);
     localStorage.removeItem("userInfo");
     toast.success("Logged out successfully")
-    navigate("/auth");
+    navigate("/");
     setMenuOpen(false);
 
   };

@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import api from '../../api/api';
 import { useUserContext } from '../context/UserContext';
 import { toast } from 'react-toastify';
+import Loader from '../components/Loader';
 
 
 const DetailBlog = () => {
@@ -44,12 +45,14 @@ const DetailBlog = () => {
       toast.error("Failed to delete blog");
     }
   };
-
-  if (loading) return <div className="loading-message">Loading blog...</div>;
-  if (!blog) return <div className="error-message">Blog not found.</div>;
+  if(loading){
+    return <Loader/>
+  }
+  
+ 
 
   const isOwner = user?._id === blog.createdBy?._id;
-
+ 
   return (
     <div className="detail-container">
       <div className="detail-card">
