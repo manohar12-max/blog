@@ -34,7 +34,7 @@ body, html {
   height: 64px;
   display: flex;
   align-items: center;
-  justify-content: center; 
+  justify-content: center;
   background-color: var(--color-border);
   color: var(--color-text-primary);
   z-index: 1000;
@@ -51,7 +51,7 @@ body, html {
 }
 
 .navbar-scrolled {
-  background-color: rgba(0, 0, 0, 0.1); 
+  background-color: rgba(0, 0, 0, 0.1);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(6px);
 }
@@ -64,6 +64,12 @@ body, html {
   cursor: pointer;
 }
 
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .navbar-actions .navbar-button {
   text-decoration: none;
   background-color: var(--color-primary);
@@ -73,10 +79,10 @@ body, html {
   font-weight: 600;
   transition: all 0.3s ease;
   cursor: pointer;
+  border: none;
 }
 
 .navbar-button {
-  border: none;
   margin-left: 10px;
 }
 
@@ -85,14 +91,52 @@ body, html {
   transform: scale(1.05);
 }
 
+.navbar-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+  padding: 8px;
+  background: none;
+  border: none;
+}
+
+.navbar-toggle  {
+
+  color: var(--color-text-primary);
+ 
+}
+
 @media (max-width: 600px) {
   .navbar-logo {
     font-size: 20px;
   }
 
+  .navbar-actions {
+    display: none;
+    
+  }
+
+  .navbar-actions.show {
+    display: flex;
+    position: absolute;
+    top: 64px;
+    right: 0;
+    flex-direction: column;
+    background-color: var(--color-border);
+    width: 100%;
+    padding: 1rem;
+  }
+
   .navbar-actions .navbar-button {
-    padding: 8px 14px;
+    padding: 10px;
     font-size: 14px;
+    width: 100%;
+    margin: 5px 0;
+  }
+
+  .navbar-toggle {
+    display: flex;
   }
 }
 
@@ -270,6 +314,18 @@ body, html {
 .page-btn.active {
   background-color: var(--color-primary);
   color: white;
+}
+.foot-note{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding:0 10px;
+  margin-top: 2rem;
+}
+.foot-note span{
+  
+  text-transform: capitalize;
+  font-weight: bold;
 }
 
 /* DetailListing */

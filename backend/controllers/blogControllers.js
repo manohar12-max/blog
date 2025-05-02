@@ -96,12 +96,11 @@ const deleteBlog = async (req, res) => {
       return res.status(404).json({ message: "Blog not found" });
     }
 
-    // Check if the current user is the owner
     if (blog.createdBy.toString() !== req.user._id.toString()) {
       return res.status(403).json({ message: "You are not authorized to delete this blog" });
     }
 
-    // Proceed with deletion
+    
     await blog.deleteOne();
 
     res.status(200).json({ message: "Blog deleted successfully" });
@@ -112,11 +111,32 @@ const deleteBlog = async (req, res) => {
 };
 
 
+const authorBlogs = async (req, res) => {
+  try {
+    const userId = req.user._id;
+
+    const blogs = await Blog.find({ createdBy: userId }).populate("createdBy", "username");
+
+    res.status(200).json({
+      success: true,
+      count: blogs.length, 
+      data: blogs,
+    });
+  } catch (error) {
+    console.error("Error fetching author blogs:", error.message);
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch author's blogs",
+    });
+  }
+};
+
 
 module.exports = {
   getAllBlogs,
   createBlog,
   singleBlog,
   editBlog,
-  deleteBlog
+  deleteBlog,
+  authorBlogs
 };
