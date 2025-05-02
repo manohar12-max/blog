@@ -14,7 +14,7 @@ const getAllBlogs = async (req, res) => {
 };
 
 const createBlog = async (req, res) => {
-    console.log(req.user)
+
   const { title, description } = req.body;
 
   try {
@@ -40,7 +40,83 @@ const createBlog = async (req, res) => {
   }
 };
 
+const singleBlog = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const blog = await Blog.findById(id).populate("createdBy", "username email");
+
+    if (!blog) {
+      return res.status(404).json({ message: "Blog not found" });
+    }
+
+    res.status(200).json({ data: blog });
+  } catch (error) {
+    console.error("Error fetching blog:", error.message);
+    res.status(500).json({ message: "Server error while fetching blog" });
+  }
+};
+
+const editBlog = async (req, res) => {
+  const { id } = req.params;
+  const updateData = req.body;
+
+  try {
+    const blog = await Blog.findById(id);
+
+    if (!blog) {
+      return res.status(404).json({ message: "Blog not found" });
+    }
+
+    // Check if the current user is the owner
+    if (blog.createdBy.toString() !== req.user._id.toString()) {
+      return res.status(403).json({ message: "You are not authorized to edit this blog" });
+    }
+
+    // Proceed with update
+    const updatedBlog = await Blog.findByIdAndUpdate(id, updateData, {
+      new: true,
+      runValidators: true,
+    }).populate("createdBy", "username email");
+
+    res.status(200).json({ data: updatedBlog });
+  } catch (error) {
+    console.error("Error updating blog:", error.message);
+    res.status(500).json({ message: "Server error while updating blog" });
+  }
+};
+
+const deleteBlog = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const blog = await Blog.findById(id);
+
+    if (!blog) {
+      return res.status(404).json({ message: "Blog not found" });
+    }
+
+    // Check if the current user is the owner
+    if (blog.createdBy.toString() !== req.user._id.toString()) {
+      return res.status(403).json({ message: "You are not authorized to delete this blog" });
+    }
+
+    // Proceed with deletion
+    await blog.deleteOne();
+
+    res.status(200).json({ message: "Blog deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting blog:", error.message);
+    res.status(500).json({ message: "Server error while deleting blog" });
+  }
+};
+
+
+
 module.exports = {
   getAllBlogs,
   createBlog,
+  singleBlog,
+  editBlog,
+  deleteBlog
 };

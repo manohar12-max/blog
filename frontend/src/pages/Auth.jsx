@@ -50,11 +50,13 @@ const Auth = () => {
           });
       localStorage.setItem("userInfo", JSON.stringify({
         token:response.data.token,
-        username:response.data.username
+        username:response.data.username,
+        _id:response.data._id,
       }));
       setUser({
         token:response.data.token,
-        username:response.data.username
+        username:response.data.username,
+        _id:response.data._id,
       })
       setFormData({ username: "", email: "", password: "" });
       setLoading(false);

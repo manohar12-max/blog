@@ -1,17 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import api from "../../api/api";
 
 const Dashboard = () => {
   const [blogs, setBlogs] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const blogsPerPage = 6;
-  const navigate=useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/posts")
-      .then(res => res.json())
-      .then(data => setBlogs(data.slice(0, 30))); 
+    const fetchBlogs = async () => {
+      try {
+        const res = await api.get("/blog");
+        setBlogs(res.data.data || []);
+      } catch (error) {
+        console.error("Error fetching blogs:", error.message);
+      }
+    };
+
+    fetchBlogs();
   }, []);
 
   const indexOfLastBlog = currentPage * blogsPerPage;
@@ -21,25 +28,34 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-container">
-      <h1 className="dashboard-title">Latest Blogs</h1>
-      {currentBlogs.map(blog => (
-        <div key={blog.id} className="blog-card">
-          <h2>{blog.title}</h2>
-          <p>{blog.body.substring(0, 150)}...</p>
-          <button 
-          onClick={()=>{navigate(`/blog/${blog.id}`)}}
-          className="read-more-btn">Read More</button>
-        </div>
-      ))}
+      <h1 className="dashboard-title">Explore Latest Blogs</h1>
+
+      <div className="blogs">
+        {currentBlogs.map((blog) => (
+          <div className="blog-card" key={blog._id}>
+            <h2 onClick={() => navigate(`/blog/${blog._id}`)} className="blog-title clickable">
+              {blog.title}
+            </h2>
+            <p className="blog-desc">
+              {blog.description.length > 150
+                ? `${blog.description.substring(0, 150)}...`
+                : blog.description}
+            </p>
+            <button className="read-more-btn" onClick={() => navigate(`/blog/${blog._id}`)}>
+              Read More
+            </button>
+          </div>
+        ))}
+      </div>
 
       <div className="pagination">
-        {[...Array(totalPages).keys()].map(num => (
+        {[...Array(totalPages)].map((_, i) => (
           <button
-            key={num}
-            className={`page-btn ${currentPage === num + 1 ? "active" : ""}`}
-            onClick={() => setCurrentPage(num + 1)}
+            key={i}
+            onClick={() => setCurrentPage(i + 1)}
+            className={`page-btn ${currentPage === i + 1 ? "active" : ""}`}
           >
-            {num + 1}
+            {i + 1}
           </button>
         ))}
       </div>

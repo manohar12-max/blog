@@ -7,7 +7,7 @@ const NavbarMain = () => {
   const { user, setUser } = useUserContext();  
   const navigate = useNavigate();
 
-console.log(user)
+
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 50);
