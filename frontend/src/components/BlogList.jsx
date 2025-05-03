@@ -76,7 +76,7 @@ const BlogList = ({
       ) : (
        <>
         <h1 className="dashboard-title">Let's start creating a Blog</h1>
-        <button className="create-button">Create</button>
+        <button className="create-button" onClick={()=>{navigate("/blog/create")}}>Create</button>
        </>
       )}
     </div>
