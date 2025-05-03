@@ -8,8 +8,9 @@ const MyBlogs = () => {
     const {user}=useUserContext()
   const [blogs, setBlogs] = useState([]);
   const [loading,setLoading]=useState(false)
-
+  
   useEffect(() => {
+    if (!user || !user.token) return;
     const fetchMyBlogs = async () => {
       setLoading(true)
       try {
@@ -29,7 +30,7 @@ const MyBlogs = () => {
       }
     };
     fetchMyBlogs();
-  }, []);
+  }, [user]);
   
   return <BlogList blogs={blogs} title="My Blogs" loading={loading}  />;
 

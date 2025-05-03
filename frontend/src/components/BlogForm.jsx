@@ -1,10 +1,11 @@
 
 import React, { useState, useEffect } from "react";
-
-const BlogForm = ({ initialData = {}, onSubmit, loading, username }) => {
+import { useNavigate } from "react-router-dom";
+import Loader from "../components/Loader"
+const BlogForm = ({ initialData = {}, onSubmit, loading, username ,edit}) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-
+  const navigate=useNavigate()
 useEffect(() => {
   if (initialData._id) {
     setTitle(initialData.title || "");
@@ -17,7 +18,9 @@ useEffect(() => {
     e.preventDefault();
     onSubmit({ title, description });
   };
-
+  if(edit && loading){
+    return <Loader/>
+  }
   return (
     <div className="create-container">
       <div className="create-card">
@@ -42,12 +45,22 @@ useEffect(() => {
           />
           <button type="submit" className="create-button" disabled={loading}>
             {loading
-              ? initialData._id
+              ? edit
                 ? "Updating..."
                 : "Posting..."
-              : initialData._id
+              : edit
               ? "Update Blog"
               : "Create Blog"}
+          </button>
+          <button 
+          className="cancel-button" 
+          onClick={()=>{
+
+            setTitle("")
+            setDescription("")
+            navigate(-1);
+          }}>
+            Cancel
           </button>
         </form>
       </div>

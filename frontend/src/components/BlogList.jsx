@@ -22,9 +22,10 @@ const BlogList = ({
   return (
     <div className="dashboard-container">
       {title && <h1 className="dashboard-title">{title}</h1>}
+  
       {loading ? (
-        <Loader/>
-      ) : (
+        <Loader />
+      ) :currentBlogs && currentBlogs?.length > 0 ? (
         <>
           <div className="blogs">
             {currentBlogs.map((blog) => (
@@ -35,13 +36,13 @@ const BlogList = ({
                 >
                   {blog.title}
                 </h2>
-
+  
                 <p className="blog-desc">
                   {blog.description.length > 150
                     ? `${blog.description.substring(0, 150)}...`
                     : blog.description}
                 </p>
-
+  
                 <p className="foot-note">
                   <span>Created By: {blog.createdBy.username}</span>
                   <button
@@ -55,7 +56,7 @@ const BlogList = ({
               </div>
             ))}
           </div>
-
+  
           {paginate && (
             <div className="pagination">
               {[...Array(totalPages)].map((_, i) => (
@@ -72,9 +73,16 @@ const BlogList = ({
             </div>
           )}
         </>
+      ) : (
+       <>
+        <h1 className="dashboard-title">Let's start creating a Blog</h1>
+        <button className="create-button">Create</button>
+       </>
       )}
     </div>
   );
+  
+
 };
 
 export default BlogList;

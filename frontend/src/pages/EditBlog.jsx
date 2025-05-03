@@ -59,6 +59,7 @@ const EditBlog = () => {
       onSubmit={handleUpdate}
       loading={loading}
       username={user?.username}
+      edit={true}
     />
   );
 };
