@@ -571,10 +571,13 @@ body, html {
 
 /* loader */
 .loader-container {
+  position: absolute;
   display: flex;
+  top:0;
+  left: 0;
   justify-content: center;
   align-items: center;
-  height: 100vh; 
+  height: 100%;
   width: 100%;
 }
 

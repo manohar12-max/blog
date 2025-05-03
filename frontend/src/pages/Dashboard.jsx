@@ -24,11 +24,8 @@ const Dashboard = () => {
     fetchBlogs();
   }, []);
 
-  if (loading) {
-    return <Loader />;
-  }
 
-  return <BlogList blogs={blogs} title="Explore Latest Blogs" />;
+  return <BlogList blogs={blogs} title="Explore Latest Blogs" loading={loading}/>;
 };
 
 export default Dashboard;

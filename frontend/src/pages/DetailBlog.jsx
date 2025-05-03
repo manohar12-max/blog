@@ -63,7 +63,7 @@ const DetailBlog = () => {
         </div>
 
         <p className="single-blog-meta">
-          By <strong>{blog.createdBy?.username}</strong> on{" "}
+          By <strong style={{textTransform:"capitalize"}}>{blog.createdBy?.username}</strong> on{" "}
           <span className="blog-date">{new Date(blog.createdAt).toLocaleDateString()}</span>
         </p>
 

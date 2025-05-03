@@ -7,9 +7,11 @@ import { toast } from "react-toastify";
 const MyBlogs = () => {
     const {user}=useUserContext()
   const [blogs, setBlogs] = useState([]);
+  const [loading,setLoading]=useState(false)
 
   useEffect(() => {
     const fetchMyBlogs = async () => {
+      setLoading(true)
       try {
         
         const res = await api.get("/blog/my-blog", {
@@ -22,12 +24,15 @@ const MyBlogs = () => {
       } catch (error) {
         console.error("Error fetching my blogs:", error.message);
         toast.error("Error fetching your blogs")
+      }finally{
+        setLoading(false)
       }
     };
     fetchMyBlogs();
   }, []);
+  
+  return <BlogList blogs={blogs} title="My Blogs" loading={loading}  />;
 
-  return <BlogList blogs={blogs} title="My Blogs" />;
 };
 
 export default MyBlogs;
