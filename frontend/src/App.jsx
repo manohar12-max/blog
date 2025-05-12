@@ -8,6 +8,7 @@ import DetailBlog from "./pages/DetailBlog";
 import CreateBlog from "./pages/CreateBlog";
 import EditBlog from "./pages/EditBlog";
 import MyBlogs from "./pages/MyBlogs";
+import NotFound from "./pages/NotFound";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/blog/my-blogs" element={<MyBlogs />} />
         <Route path="/blog/create" element={<CreateBlog />} />
         <Route path="/blog/edit/:id" element={<EditBlog />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );
