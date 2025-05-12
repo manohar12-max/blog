@@ -20,7 +20,7 @@ const auth = async (req, res, next) => {
       }
        req.user = user;
 
-      return next();
+   next();
     } catch (error) {
       res.status(401);
       throw new Error("Not authorized, token failed");
