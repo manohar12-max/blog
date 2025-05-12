@@ -9,7 +9,7 @@ const getAllBlogs = async (req, res) => {
     res.status(200).json({ success: true, count: blogs.length, data: blogs });
   } catch (error) {
     console.error("Error fetching blogs:", error.message);
-    res.status(500).json({ success: false, message: "Failed to fetch blogs" });
+    res.status(500).json({ success: false, message: error.message || "Failed to fetch blogs" });
   }
 };
 
