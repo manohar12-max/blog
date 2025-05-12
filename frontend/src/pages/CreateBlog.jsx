@@ -32,7 +32,7 @@ const CreateBlog = () => {
       }
     } catch (error) {
       console.error("Error creating blog:", error.message);
-      toast.error("An error occurred while creating the blog.");
+      toast.error(res.data.message ||"An error occurred while creating the blog.");
     } finally {
       setLoading(false);
     }
