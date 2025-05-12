@@ -9,7 +9,7 @@ import CreateBlog from "./pages/CreateBlog";
 import EditBlog from "./pages/EditBlog";
 import MyBlogs from "./pages/MyBlogs";
 import NotFound from "./pages/NotFound";
-  
+    
 function App() {
   return (
     <>
