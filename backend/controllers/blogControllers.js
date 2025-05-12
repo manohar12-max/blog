@@ -36,7 +36,7 @@ const createBlog = async (req, res) => {
     });
   } catch (error) {
     console.error("Error creating blog:", error.message);
-    res.status(500).json({ message: "Server error while creating blog" });
+    res.status(500).json({ message:  error.message || "Server error while creating blog" });
   }
 };
 
