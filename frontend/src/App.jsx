@@ -7,7 +7,7 @@ import NavbarMain from "./components/NavbarMain";
 import DetailBlog from "./pages/DetailBlog";
 import CreateBlog from "./pages/CreateBlog";
 import EditBlog from "./pages/EditBlog";
-import MyBlogs from "./pages/MyBlogs";
+import MyBlogs from "./pages/MyBlogs"; 
 import NotFound from "./pages/NotFound";
     
 function App() {
